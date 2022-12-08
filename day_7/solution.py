@@ -3,6 +3,7 @@ import unittest
 from dataclasses import dataclass, field
 from typing import List, Optional
 from collections import deque
+from functools import cache
 
 
 @dataclass
@@ -23,6 +24,7 @@ class Folder:
     children: List[Folder | File] = field(default_factory=list)
     parent: Optional[Folder] = None
 
+    @cache
     def size(self) -> int:
         return sum((x.size() for x in self.children))
 
